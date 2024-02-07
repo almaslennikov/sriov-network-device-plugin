@@ -113,10 +113,12 @@ var _ = Describe("NetResourcePool", func() {
 
 			fake1 := &mocks.PciNetDevice{}
 			fake1.On("GetPciAddr").Return("0000:01:00.1").
-				On("GetVdpaDevice").Return(nil)
+				On("GetVdpaDevice").Return(nil).
+				On("IsRdma").Return(true)
 			fake2 := &mocks.PciNetDevice{}
 			fake2.On("GetPciAddr").Return("0000:01:00.2").
-				On("GetVdpaDevice").Return(nil)
+				On("GetVdpaDevice").Return(nil).
+				On("IsRdma").Return(true)
 			pcis := map[string]types.HostDevice{"fake1": fake1, "fake2": fake2}
 
 			It("should call nadutils to create a well formatted DeviceInfo object", func() {
